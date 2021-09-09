@@ -1,0 +1,8 @@
+.git
+.gitignore
+.github
+.vscode
+.env
+node_modules/
+**/*.log
+docker-compose.yaml
