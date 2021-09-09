@@ -15,6 +15,7 @@ Repo test and make demos for various performance tests and strategies.
 
 ## Run K6 test
 
+`chmod +x runtest.sh`
 `./runtest.sh 001`
 
 ## Challenges / tasks

@@ -13,6 +13,8 @@ export let options = {
     }
 };
 
+const hostname = "http://host.docker.internal:7777"
+
 export default function () {
-    const response = http.get('http://host.docker.internal:7777/delay/150/5')
+    const response = http.get(`${hostname}/delay/150/5`)
 }
