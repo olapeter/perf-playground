@@ -11,11 +11,11 @@ Repo test and make demos for various performance tests and strategies.
 
 1. git clone <https://github.com/olapeter/perf-playground.git>
 1. docker-compose up --build
-1. <http://localhost:7777/>
+1. Visit <http://localhost:7777/>
 
 ## Run K6 test
 
-`docker run -i --rm -v /c/arbeid/perf-playground/k6:/k6 loadimpact/k6:latest run /k6/test001.js`
+`./runtest.sh 001`
 
 ## Challenges / tasks
 

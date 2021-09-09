@@ -5,13 +5,14 @@ export let options = {
     scenarios: {
         open_model: {
             executor: 'constant-arrival-rate',
-            rate: 1,
+            rate: 5,
             duration: '10s',
-            preAllocatedVUs: 1
+            preAllocatedVUs: 1,
+            maxVUs: 3
         }
     }
 };
 
 export default function () {
-    const response = http.get('http://host.docker.internal:7777/delay/50/2')
+    const response = http.get('http://host.docker.internal:7777/delay/150/5')
 }
