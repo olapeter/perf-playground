@@ -10,12 +10,13 @@ Repo test and make demos for various performance tests and strategies.
 ## Howto
 
 1. git clone <https://github.com/olapeter/perf-playground.git>
-1. docker-compose up --build
+1. `docker-compose up --build` (build argument only required when something has changed)
 1. Visit <http://localhost:7777/>
 
 ## Run K6 test
 
-`chmod +x runtest.sh`
+`chmod +x runtest.sh` (first time only)
+
 `./runtest.sh 001`
 
 ## Challenges / tasks
