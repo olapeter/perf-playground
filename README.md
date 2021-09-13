@@ -4,7 +4,6 @@ Repo test and make demos for various performance tests and strategies.
 
 ## Prerequisites
 
-1. Git e.g <https://git-scm.com/downloads>
 1. Docker Desktop <https://docs.docker.com/desktop/>
 
 ## Howto
@@ -21,7 +20,9 @@ Repo test and make demos for various performance tests and strategies.
 
 ## Challenges / tasks
 
+1. Find out how to see the HTTP headers of a K6 request 
 1. Modify the k6 test to add an assert for response code 200
+1. Modify the k6 test to run a total of 50 requests in 10 seconds
 1. Modify the k6 test to add a threshold for response time
 1. Modify the k6 test to log in a user, then access an authenticated endpoint
 
