@@ -5,8 +5,8 @@ export let options = {
     scenarios: {
         open_model: {
             executor: 'constant-arrival-rate',
-            rate: 5,
-            duration: '10s',
+            rate: 1,
+            duration: '1s',
             preAllocatedVUs: 1,
             maxVUs: 3
         }
