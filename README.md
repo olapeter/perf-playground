@@ -15,6 +15,8 @@ Repo test and make demos for various performance tests and strategies.
 
 ## Run k6 test
 
+Switch to a new terminal window and cd into perf-playground
+
 `chmod +x runtest.sh` (first time only)
 
 `./runtest.sh 001`
