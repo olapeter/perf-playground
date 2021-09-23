@@ -23,7 +23,7 @@ Switch to a new terminal window and cd into perf-playground
 
 ## Challenges / tasks
 
-1. Locate the logs and look at the output
+1. Locate the logs and look at the output (hint: type `code .` in the terminal)
 1. Find out how to log the HTTP headers of the k6 requests in the test
 1. Modify the k6 test to add a check for response code 200
 1. Modify the k6 test to run a total of 50 requests in 10 seconds
