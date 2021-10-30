@@ -1,10 +1,10 @@
 {
-  "name": "perf-playground",
+  "name": "perf-playground-app",
   "version": "1.0.0",
-  "description": "Perf test demo",
+  "description": "Docker, k6 demo",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node src/main.js",
     "test": "mocha test/unit.js"
   },
   "repository": {
@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/olapeter/perf-playground#readme",
   "dependencies": {
+    "bent": "^7.3.12",
     "express": "^4.17.1"
   },
   "devDependencies": {

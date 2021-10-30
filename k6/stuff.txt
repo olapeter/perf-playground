@@ -1,0 +1,6 @@
+#  Possible docker-compose-stuff
+#  k6:
+#    image: loadimpact/k6:latest
+#    command: run /test.js
+#    volumes:
+#      - ./test.js:/test.js

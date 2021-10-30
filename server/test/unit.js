@@ -1,16 +1,9 @@
 const assert = require('assert');
-const internal = require('stream');
 
-const simpleresponses = require('../src/simpleresponses')
 const auth = require('../src/auth')
+const simpleresponses = require('../src/simpleresponses')
 
-describe('Ping', () => {
-    it('Pong', async () => {
-        const response = await simpleresponses.pong()
-        assert(response.pong == "I'm alive!")
-        assert(response.ts > 0)
-    })
-})
+
 describe('Delay', () => {
     it('50ms', async () => {
         const delay = 50

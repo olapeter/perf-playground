@@ -1,12 +1,5 @@
 sleep = ms => new Promise(res => setTimeout(res, ms));
 
-async function pong(){
-    return { 
-        "pong": "I'm alive!",
-        "ts": Date.now()
-    }
-}
-
 async function simpleDelay(delay){
     await sleep(delay)
     return {
@@ -26,7 +19,6 @@ async function randomDelay(delay, percentage){
 }
 
 module.exports = {
-    pong, 
     simpleDelay,
     randomDelay
 }

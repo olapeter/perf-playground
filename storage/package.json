@@ -1,0 +1,26 @@
+{
+  "name": "perf-playground-storage",
+  "version": "1.0.0",
+  "description": "Docker, k6 demo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "mocha test/unit.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olapeter/perf-playground.git"
+  },
+  "author": "Ola P. Kleiven",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olapeter/perf-playground/issues"
+  },
+  "homepage": "https://github.com/olapeter/perf-playground#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "mocha": "^9.1.0"
+  }
+}

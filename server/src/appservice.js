@@ -3,6 +3,7 @@ const path = require('path')
 const app = express()
 app.use(express.json());
 const auth = require('./auth')
+const health = require('./health')
 const simpleresponses = require('./simpleresponses')
 
 app.get('/', function (_, res) {
@@ -21,6 +22,10 @@ app.get('/', function (_, res) {
     })
 })
 
+app.get('/health', async function (_, res) {
+    res.json(await health.health())
+})
+
 app.get('/file/:name', function (req, res) {
     const options = {
         root: path.join(__dirname, '../public'),
@@ -33,10 +38,6 @@ app.get('/file/:name', function (req, res) {
             log.error(err.message)
         }
     })
-})
-
-app.get('/ping', async function (_, res) {
-    res.json(await simpleresponses.pong())
 })
 
 app.get('/delay/:delay', async function (req, res) {
@@ -68,4 +69,4 @@ app.get('/authenticatedendpoint', async function (req, res){
 const port = 7777
 app.listen(port)
 
-console.log(`Started service, listening on port ${port}`)
+console.log(`Started app service, listening on port ${port}`)

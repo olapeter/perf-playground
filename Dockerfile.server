@@ -5,19 +5,19 @@ FROM node:current-alpine as build
 
 WORKDIR /usr/app
 
-COPY app/package.json app/package-lock.json ./
-COPY app/src/ ./src
+COPY server/package.json server/package-lock.json ./
+COPY server/src/ ./src
 
 # install and build test
 RUN npm install --no-progress --loglevel error
 
 # unit tests
-COPY app/test/ ./test
-RUN npm test
+#COPY server/test/ ./test
+#RUN npm test
 
 # install production
 RUN npm install --production --no-progress --loglevel error
-COPY app/public/ ./public
+COPY server/public/ ./public
 
 
 #################################
@@ -35,4 +35,4 @@ ENV LOGLEVEL=INFO
 
 USER 1000
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD [ "node", "./src/app.js" ]
+CMD [ "node", "./src/appservice.js" ]

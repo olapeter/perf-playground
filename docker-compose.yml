@@ -1,13 +1,16 @@
 version: '3.4'
 services:
-  app:
+  server:
     build: 
       context: .
-      dockerfile: Dockerfile.app
+      dockerfile: Dockerfile.server
     ports:
       - "7777:7777" 
-#  k6:
-#    image: loadimpact/k6:latest
-#    command: run /test.js
-#    volumes:
-#      - ./test.js:/test.js
+    environment:
+      - ISCONTAINER=true
+  #storage:
+  #  build: 
+  #    context: .
+  #    dockerfile: Dockerfile.storage
+  #  ports:
+  #    - "8888:8888" 
