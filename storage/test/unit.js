@@ -1,11 +1,12 @@
 const assert = require('assert');
-const responses = require('../src/responses')
+const StorageResponses = require('../src/responses')
+const responses = new StorageResponses()
 
 describe('A Test', () => {
     it('Test A', async () => {
         // Gratulerer, du har funnet feilen :)
         // Kanskje slette dette rælet?
-        assert(false)
+        assert("epler"=="pærer")
     })
 })
 

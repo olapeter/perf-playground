@@ -1,7 +1,9 @@
 const express = require('express')
-const responses = require('./responses')
+const StorageResponses = require('./responses')
 const app = express()
 app.use(express.json())
+
+const responses = new StorageResponses()
 
 app.get('/', function (_, res) {
     res.contentType("text/plain").send("Storage root")

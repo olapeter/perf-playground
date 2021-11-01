@@ -1,24 +1,22 @@
-sleep = ms => new Promise(res => setTimeout(res, ms));
+module.exports = class SimpleResponses {
 
-async function simpleDelay(delay){
-    await sleep(delay)
-    return {
-        "delayed": delay
-    }
-}
+    sleep = ms => new Promise(res => setTimeout(res, ms));
 
-async function randomDelay(delay, percentage){
-    if(Math.random()*100 > 100-percentage){
-        await sleep(delay)
-    } else {
-        delay = 0
+    async simpleDelay(delay) {
+        await this.sleep(delay)
+        return {
+            "delayed": delay
+        }
     }
-    return {
-        "delayed": delay
-    }
-}
 
-module.exports = {
-    simpleDelay,
-    randomDelay
+    async randomDelay(delay, percentage) {
+        if (Math.random() * 100 > 100 - percentage) {
+            await this.sleep(delay)
+        } else {
+            delay = 0
+        }
+        return {
+            "delayed": delay
+        }
+    }
 }

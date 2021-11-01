@@ -2,9 +2,15 @@ const express = require('express')
 const path = require('path')
 const app = express()
 app.use(express.json());
-const auth = require('./auth')
-const health = require('./health')
-const simpleresponses = require('./simpleresponses')
+const Auth = require('./auth')
+const HealthCheck = require('./health')
+const SimpleResponses = require('./simpleresponses')
+const StorageRepository = require('./storageRepository')
+
+const auth = new Auth()
+const healthCheck = new HealthCheck()
+const simpleResponses = new SimpleResponses()
+const storageRepository = new StorageRepository()
 
 app.get('/', function (_, res) {
     const options = {
@@ -23,7 +29,7 @@ app.get('/', function (_, res) {
 })
 
 app.get('/health', async function (_, res) {
-    res.json(await health.health())
+    res.json(await healthCheck.health())
 })
 
 app.get('/file/:name', function (req, res) {
@@ -41,11 +47,23 @@ app.get('/file/:name', function (req, res) {
 })
 
 app.get('/delay/:delay', async function (req, res) {
-    res.json(await simpleresponses.simpleDelay(req.params.delay))
+    res.json(await simpleResponses.simpleDelay(req.params.delay))
 })
 
 app.get('/delay/:delay/:percentage', async function (req, res) {
-    res.json(await simpleresponses.randomDelay(req.params.delay, req.params.percentage))
+    res.json(await simpleResponses.randomDelay(req.params.delay, req.params.percentage))
+})
+
+app.get('/fastblob/:id', async function (req, res) {
+    res.json(await storageRepository.fastBlob(req.params.id))
+})
+
+app.get('/slowblob/:id', async function (req, res) {
+    res.json(await storageRepository.slowBlob(req.params.id))
+})
+
+app.get('/slowblobwithretry/:id', async function (req, res) {
+    res.json(await storageRepository.slowBlobWithRetry(req.params.id))
 })
 
 app.post('/auth/token', async function(req, res){

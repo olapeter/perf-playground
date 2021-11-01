@@ -1,14 +1,79 @@
 const assert = require('assert');
 
-const auth = require('../src/auth')
-const simpleresponses = require('../src/simpleresponses')
+const Auth = require('../src/auth')
+const HealthCheck = require('../src/health')
+const HttpClient = require('../src/httpClient')
+const SimpleResponses = require('../src/simpleresponses')
+const StorageRepository = require('../src/storageRepository')
 
+const auth = new Auth()
+const simpleResponses = new SimpleResponses()
 
-describe('Delay', () => {
+describe('Health', () => {
+    it('isHealthy', async () => {
+        httpClientMock = new HttpClient()
+        httpClientMock.json = async () => { return {"status": "OK"} }
+        
+        const healthCheck = new HealthCheck(httpClientMock)
+        const response = await healthCheck.health()
+        assert(response.status == "OK")
+    })
+    it('Timeout error', async () => {
+        httpClientMock = new HttpClient()
+        httpClientMock.json = async () => { return {"status": "timeouterr"} }
+        
+        const healthCheck = new HealthCheck(httpClientMock)
+        const response = await healthCheck.health()
+        assert(response.status == "ERROR")
+    })
+    it('Connection error', async () => {
+        httpClientMock = new HttpClient()
+        httpClientMock.json = async () => { return {"status": "connectionerr"} }
+        
+        const healthCheck = new HealthCheck(httpClientMock)
+        const response = await healthCheck.health()
+        assert(response.status == "ERROR")
+    })
+    it('Unknown status', async () => {
+        httpClientMock = new HttpClient()
+        httpClientMock.json = async () => { return {"status": "unknown"} }
+        
+        const healthCheck = new HealthCheck(httpClientMock)
+        const response = await healthCheck.health()
+        assert(response.status == "WARNING")
+    })
+})
+
+describe('Blob storage', () => {
+    it('Fast blob', async () => {
+        httpClientMock = new HttpClient()
+        httpClientMock.json = async () => { return {"id": "testid"} }
+        storageRepository = new StorageRepository(httpClientMock)
+        const response = await storageRepository.fastBlob("testid")
+        assert(response.id == "testid")
+    })
+    it('Slow blob', async () => {
+        httpClientMock = new HttpClient()
+        httpClientMock.json = async () => { return {"id": "testid"} }
+        storageRepository = new StorageRepository(httpClientMock)
+        const response = await storageRepository.slowBlob("testid")
+        assert(response.id == "testid")
+    })
+    it('Slow blob with retry', async () => {
+        httpClientMock = new HttpClient()
+        httpClientMock.json = async () => { return {"status": "timeouterr"} }
+        storageRepository = new StorageRepository(httpClientMock)
+        const response = await storageRepository.slowBlobWithRetry("testid")
+        assert(response.status == "timeouterr")
+        assert(response.retryCount == 5)
+    })
+})
+
+describe('Simple Delay', () => {
     it('50ms', async () => {
         const delay = 50
         const startTime = Date.now()
-        const response = await simpleresponses.simpleDelay(delay)
+        const response = await simpleResponses.simpleDelay(delay)
         const endTime = Date.now()
         assert(response.delayed == delay)
         assert(endTime - startTime >= delay)
@@ -17,18 +82,18 @@ describe('Delay', () => {
     it('100ms', async () => {
         const delay = 100
         const startTime = Date.now()
-        const response = await simpleresponses.simpleDelay(delay)
+        const response = await simpleResponses.simpleDelay(delay)
         const endTime = Date.now()
         assert(response.delayed == delay)
         assert(endTime - startTime >= delay)
         assert(endTime - startTime < delay + 20)
     })
 })
-describe('Random Delay', () => {
+describe('Simple Random Delay', () => {
     it('50ms, 100%', async () => {
         const delay = 50
         const startTime = Date.now()
-        const response = await simpleresponses.randomDelay(delay, 100)
+        const response = await simpleResponses.randomDelay(delay, 100)
         const endTime = Date.now()
         assert(response.delayed == delay)
         assert(endTime - startTime >= delay)
@@ -37,7 +102,7 @@ describe('Random Delay', () => {
     it('50ms, 0%', async () => {
         const delay = 50
         const startTime = Date.now()
-        const response = await simpleresponses.randomDelay(delay, 0)
+        const response = await simpleResponses.randomDelay(delay, 0)
         const endTime = Date.now()
         assert(response.delayed == 0)
         assert(endTime - startTime < 20)
