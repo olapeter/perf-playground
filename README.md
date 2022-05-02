@@ -16,9 +16,17 @@ Repo test and make demos for various performance tests and strategies.
 
 ## Container workshop
 
+### Learning objectives
+
+1. What is a container?
+1. Is Docker a technology?
+1. Why not use VMWare, VirtualBox etc.?
+1. Anatomy of a Dockerfile
+1. Kubernetes vs. docker-compose
+
 ### Initial state
 
-Page at <http://127.0.0.1:7777/> should show some red error. The objective of the workshop is to make it green.
+Page at <http://127.0.0.1:7777/> should show some red error. We want to make it green.
 
 To do that we need to containerize our storage module
 
