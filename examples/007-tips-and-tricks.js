@@ -20,5 +20,3 @@ export default function(){
     console.log(response.json('args.foo'))
 
 }
-
-// K6_WEB_DASHBOARD=true K6_WEB_DASHBOARD_PERIOD=1s k6 run
